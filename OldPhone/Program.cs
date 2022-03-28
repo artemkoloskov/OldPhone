@@ -28,7 +28,7 @@ namespace OldPhone
 			Console.WriteLine(OldPhonePad("227*#"));
 			Console.WriteLine(OldPhonePad("4433555 555666#"));
 			Console.WriteLine(OldPhonePad("8 88777444666*664#"));
-			Console.WriteLine(OldPhonePad("4433555 55566606644422233086660633 338666*0999666880442888330206644422233032999#"));
+			Console.WriteLine(OldPhonePad("4433555 55566666666666606644422233086660633 338666*0999666880442888330206644422233032999#"));
 		}
 
 		private static string OldPhonePad(string input)
@@ -65,9 +65,7 @@ namespace OldPhone
 						}
 						else
 						{
-							string keySequence = PadKeys[key];
-
-							selectedLetter = keySequence[keySequence.IndexOf(selectedLetter) + 1];
+							selectedLetter = GetSelectedLetter(key, selectedLetter);
 						}
 
 						break;
@@ -77,6 +75,15 @@ namespace OldPhone
 			}
 
 			return result;
+		}
+
+		private static char GetSelectedLetter(char key, char previouslySelectedLetter)
+		{
+			string keySequence = PadKeys[key];
+
+			return keySequence.IndexOf(previouslySelectedLetter) == (keySequence.Length - 1)
+				? keySequence[0]
+				: keySequence[keySequence.IndexOf(previouslySelectedLetter) + 1];
 		}
 	}
 }
